@@ -1,4 +1,4 @@
-package config
+package bitcask
 
 import "time"
 

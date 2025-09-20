@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/yashagw/kvdb/internal/bitcask"
-	"github.com/yashagw/kvdb/internal/config"
 )
 
 func main() {
@@ -16,7 +15,7 @@ func main() {
 	defer os.RemoveAll(dbPath)
 
 	// Open database
-	db, err := bitcask.Open(dbPath, config.DefaultConfig())
+	db, err := bitcask.Open(dbPath, bitcask.DefaultConfig())
 	if err != nil {
 		log.Fatal("Failed to open database:", err)
 	}

@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 	"testing"
-
-	"github.com/yashagw/kvdb/internal/config"
 )
 
 // setupBenchDB creates a temporary database for benchmarking
@@ -17,7 +15,7 @@ func setupBenchDB(b *testing.B) (*Bitcask, func()) {
 		b.Fatal(err)
 	}
 
-	cfg := config.DefaultConfig()
+	cfg := DefaultConfig()
 	cfg.SyncWrites = false              // Faster for benchmarking
 	cfg.MaxFileSize = 100 * 1024 * 1024 // 100MB files
 
@@ -193,7 +191,7 @@ func BenchmarkFileRotation(b *testing.B) {
 	}
 	defer os.RemoveAll(tmpDir)
 
-	cfg := config.DefaultConfig()
+	cfg := DefaultConfig()
 	cfg.SyncWrites = false
 	cfg.MaxFileSize = 1024 * 1024 // Small 1MB files to force rotation
 
@@ -256,7 +254,7 @@ func BenchmarkReopen(b *testing.B) {
 	}
 	defer os.RemoveAll(tmpDir)
 
-	cfg := config.DefaultConfig()
+	cfg := DefaultConfig()
 
 	// Pre-populate database
 	{

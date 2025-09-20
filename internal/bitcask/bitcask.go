@@ -7,8 +7,6 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-
-	"github.com/yashagw/kvdb/internal/config"
 )
 
 // KeyDirEntry represents an entry in the in-memory key directory
@@ -26,13 +24,13 @@ type Bitcask struct {
 	keyDir        map[string]*KeyDirEntry // In-memory key directory
 	activeFile    *LogFile                // Currently active log file for writes
 	readOnlyFiles map[uint32]*LogFile     // Read-only log files
-	config        *config.Config          // Configuration options
+	config        *Config                 // Configuration options
 }
 
 // Open opens a Bitcask database at the given path
-func Open(path string, cfg *config.Config) (*Bitcask, error) {
+func Open(path string, cfg *Config) (*Bitcask, error) {
 	if cfg == nil {
-		cfg = config.DefaultConfig()
+		cfg = DefaultConfig()
 	}
 
 	// Create directory if it doesn't exist
